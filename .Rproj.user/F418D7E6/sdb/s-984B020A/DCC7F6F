@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(fastAdaboost)\nstr(combi)\ncombi$Survived=as.factor(combi$Survived)\nboost=ada(as.factor(Survived)~Pclass + Sex + Age  + Fare + Adult+\n                Embarked + CabinSection + Title + FamilySize +\n                TicketID  +FamilyID2,\n               data=combi[1:891,])\nadb_test=combi[892:nrow(combi),]\nadb_test$Survived=NULL\npredBoost=predict(boost,newdata=adb_test)\nprint (predBoost)\ntable(predBoost)\nsubmit <- data.frame(PassengerId = test$PassengerId, Survived = predBoost)\nwrite.csv(submit, file = \"submission.csv\", row.names = FALSE)\n\n\n#XGBOOSt\nxcombi=subset(combi,select = c(\"Pclass\",\"Sex\",'Age','SibSp','Parch'\n                               ,'Fare','FamilySize','TicketID','Survived'))\nXtrain=xcombi[1:891,]\nXtest=xcombi[892:nrow(combi),]\nXtest$Survived=NULL\n\nlibrary(xgboost)\n\nxgboost(data =Xtrain,label = Xtrain$Survived)\n\n\n",
+    "created" : 1486686711270.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2783994585",
+    "id" : "DCC7F6F",
+    "lastKnownWriteTime" : 1486693953,
+    "last_content_update" : 1486693953073,
+    "path" : "C:/Users/sanja/Desktop/Sanjana/books/CSE/Machine Learning/Projects/Kaggle/Titanic(Machine learning from disaster)/Boosting.R",
+    "project_path" : "Boosting.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

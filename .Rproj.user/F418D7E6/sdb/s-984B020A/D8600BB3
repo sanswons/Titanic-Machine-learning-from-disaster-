@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(\"randomForest\")\nset.seed(60)\nRF=randomForest(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare +\n                             Embarked + Title + FamilySize + FamilyID2,\n                       data=combi[1:891,], \n                       importance=TRUE, \n                       ntree=2000)\nvarImpPlot(RF)\n\nlibrary(party)\nset.seed(415)\nrf_test=combi[892:nrow(combi),]\nrf_test$Survived=NULL\n\nRF <- cforest(as.factor(Survived) ~ TicketID+Pclass + Sex + Age+ Fare +\n            Embarked+Adult+Title+FamilySize+FamilyID,\n               data = combi[1:891,], \n               controls=cforest_unbiased(ntree=2000, mtry=3))\npred_rf <- predict(RF, rf_test,OOB=TRUE,type='response')\ntable(pred_rf)\nsubmit <- data.frame(PassengerId = test$PassengerId, Survived = pred_rf)\nwrite.csv(submit, file = \"submission.csv\", row.names = FALSE)\n ",
+    "created" : 1483391785210.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1104498285",
+    "id" : "D8600BB3",
+    "lastKnownWriteTime" : 1483941404,
+    "last_content_update" : 1483941404261,
+    "path" : "C:/Users/sanja/Desktop/Sanjana/books/CSE/Machine Learning/Projects/Kaggle/Titanic(Machine learning from disaster)/RandomForest.R",
+    "project_path" : "RandomForest.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
